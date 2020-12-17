@@ -7,7 +7,7 @@ import org.sql2o.Sql2oException;
 
 import java.util.List;
 
-public class Sql2oBookingDao implements BookingDao {
+public class Sql2oBookingDao implements BookingDao{
 
     private final Sql2o sql2o;
     public Sql2oBookingDao(Sql2o sql2o) {
