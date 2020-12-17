@@ -1,5 +1,6 @@
 package dao;
 
+import models.Booking;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,7 +27,20 @@ public class Sql2oBookingDaoTest {
         conn.close();
     }
 
-    @Test
-    public void name() {
-    }
+//    @Test
+//    public void name() {
+//    }
+
+//    @Test
+//    public void clearAll() throws Exception{
+//        Booking testBooking= setupBooking();
+////        Booking otherBooking = setupBooking();
+//        bookingDao.clearAll();
+//        assertEquals(0, bookingDao.getAll().size());
+//    }
+//    public Booking setupBooking() {
+//        Booking = new Booking("kim", "nakuru", "VIP", "Juice");
+//        bookingDao.add(booking);
+//        return booking;
+//    }
 }

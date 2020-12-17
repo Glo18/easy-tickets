@@ -27,18 +27,35 @@ public class Sql2oBookingDao implements BookingDao{
         }
     }
 
+    @Override
+    public List<Booking> getAll() {
+        try (Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM booking")
+                    .executeAndFetch(Booking.class);
+        }
+    }
 
     @Override
-    public List<Booking> getName() {
+    public List<Booking> getAllNames() {
         try (Connection con = sql2o.open()) {
-            return con.createQuery("SELECT * FROM reviews")
+            return con.createQuery("SELECT * FROM booking")
+//                    .addParameter("restaurantId", restaurantId)
+                    .executeAndFetch(Booking.class);
+        }
+    }
+
+
+    @Override
+    public List<Booking> getAllName() {
+        try (Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM booking")
                     .executeAndFetch(Booking.class);
         }
     }
 
     @Override
     public void clearAll() {
-        String sql = "DELETE from reviews";
+        String sql = "DELETE from booking";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql).executeUpdate();
         } catch (Sql2oException ex) {
