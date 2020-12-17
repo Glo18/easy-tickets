@@ -1,3 +1,5 @@
+package models;
+
 import java.util.Objects;
 
 public class Booking {
@@ -93,4 +95,3 @@ public class Booking {
         return Objects.hash(name, destination, travel_class, food, number, tickets, id);
     }
 }
-
