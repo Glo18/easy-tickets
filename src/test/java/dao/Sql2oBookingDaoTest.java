@@ -17,7 +17,7 @@ public class Sql2oBookingDaoTest {
     @Before
     public void setUp() throws Exception {
         String connectionString = "jdbc:postgresql://localhost:5432/booking_test";
-        Sql2o sql2o = new Sql2o(connectionString, "", "");
+        Sql2o sql2o = new Sql2o(connectionString, "glory", "myPassword");
        bookingDao = new Sql2oBookingDao(sql2o);
         conn = (Connection) sql2o.open();
     }

@@ -14,7 +14,7 @@ public class App {
         Gson gson = new Gson();
 
         String connectionString = "jdbc:postgresql://localhost:5432/booking_test";
-        Sql2o sql2o = new Sql2o(connectionString, "", "");
+        Sql2o sql2o = new Sql2o(connectionString, "glory", "myPassword");
 
         bookingDao = new Sql2oBookingDao(sql2o);
         conn = sql2o.open();

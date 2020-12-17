@@ -1,2 +1,2 @@
-   DROP DATABASE booking;
-   DROP DATABASE booking_test;
+   DROP DATABASE bookings;
+   DROP DATABASE bookings_test;

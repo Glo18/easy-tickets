@@ -15,7 +15,7 @@ public class Sql2oBookingDao implements BookingDao{
     }
     @Override
     public void add(Booking booking) {
-        String sql = "INSERT INTO reviews (writtenby, content, rating, restaurantid) VALUES (:writtenBy, :content, :rating, :restaurantId)"; //if you change your model, be sure to update here as well!
+        String sql = "INSERT INTO booking (name, destination, travelClass, food, number, tickets) VALUES (:name, :destination, :travelClass, :food, :number, :tickets)"; //if you change your model, be sure to update here as well!
         try (Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql, true)
                     .bind(booking)
