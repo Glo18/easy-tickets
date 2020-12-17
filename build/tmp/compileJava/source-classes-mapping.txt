@@ -1,8 +1,0 @@
-models/Booking.java
- models.Booking
-dao/BookingDao.java
- dao.BookingDao
-App.java
- App
-dao/Sql2oBookingDao.java
- dao.Sql2oBookingDao
