@@ -1,30 +1,58 @@
-import com.google.gson.Gson;
-import dao.Sql2oBookingDao;
-import models.Booking;
-import org.sql2o.Connection;
-import org.sql2o.Sql2o;
 
-import static spark.Spark.post;
+import dao.passengerDao;
+import models.passenger;
+
+import spark.ModelAndView;
+import spark.template.handlebars.HandlebarsTemplateEngine;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import static spark.Spark.*;
 
 public class App {
 
     public static void main(String[] args) {
-        Sql2oBookingDao bookingDao;
-        Connection conn;
-        Gson gson = new Gson();
+        staticFileLocation("/public");
 
-        String connectionString = "jdbc:postgresql://localhost:5432/booking_test";
-        Sql2o sql2o = new Sql2o(connectionString, "glory", "myPassword");
+        get("/tasks/delete", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            passenger.clearAll(); //change
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
-        bookingDao = new Sql2oBookingDao(sql2o);
-        conn = sql2o.open();
+        get("/passenger/:id/delete", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfPassengerToDelete = Integer.parseInt(req.params("id"));
+            passenger deletePassenger = passenger.findById(idOfPassenegerToDelete); //change
+            deletePassenger.deletePassenger();
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
-        post("/booking/new", "application/json", (req, res) -> {
-            Booking booking = gson.fromJson(req.body(), Booking.class);
-            bookingDao.add(booking);
-            res.status(201);
-            res.type("application/json");
-            return gson.toJson(booking);
-        });
+        get("/", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            ArrayList<passenger> passenger = passenger.getAll(); //change
+            model.put("passenger", passenger);
+            return new ModelAndView(model, "index.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        get("/passenger/new", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return new ModelAndView(model, "passenger-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        post("/passenger", (req, res) -> { //URL to make new task on POST route
+            Map<String, Object> model = new HashMap<>();
+            String description = req.queryParams("name");
+            passenger newPassenger = new passenger(name); //change
+            passengerDao.add(newPassenger);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
+
     }
+
 }
